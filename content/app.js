@@ -1,1 +1,1 @@
-logMessage('Hello World from content using workaround injected script')
+console.log('Hello World -app.js')
