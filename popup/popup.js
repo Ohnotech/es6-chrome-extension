@@ -1,10 +1,10 @@
-import { addMessageToBody, ExtensionStorage } from '../common.js'
+import { addMessageToBody } from '../common.js'
 
-const mButton = document.getElementById('here');
+const mButton = document.getElementById('my-button');
 mButton.addEventListener('click', () => {
+  addMessageToBody();
   chrome.tabs.query({ active: true, lastFocusedWindow: true })
     .then(([tab]) => {
-      console.log(chrome.scripting, chrome.tabs.executeScript);
       chrome.scripting.executeScript(
         {
           target: {tabId: tab.id},
@@ -13,8 +13,3 @@ mButton.addEventListener('click', () => {
         })    
     })
 });
-
-const extensionStorage = new ExtensionStorage()
-extensionStorage.getData().then(function (items) {
-  console.log(items)
-})
