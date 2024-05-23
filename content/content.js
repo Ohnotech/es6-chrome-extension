@@ -13,7 +13,7 @@ try {
             
             console.log('Message received from popup.js:', request.message);
 
-            (async () => {
+            // (async () => {
                 const src = chrome.runtime.getURL("content/content-module.js");
                 import(src).then((jsModule => {
                     if(request.message === "log-message")
@@ -22,7 +22,7 @@ try {
                         jsModule.alertMessage("Alert message in content.js");
                 }))
 
-            })();
+            // })();
 
             sendResponse({
                 received: true
