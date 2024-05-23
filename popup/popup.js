@@ -1,17 +1,19 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
-    var sendMessageButton = document.getElementById('send-message');
-    sendMessageButton.addEventListener('click', sendMessageToContentScript);
+    const logMessageButton = document.getElementById('log-message');
+    logMessageButton.addEventListener('click', ()=>sendMessageToContentScript("log-message"));
+    const alertMessageButton = document.getElementById('alert-message');
+    alertMessageButton.addEventListener('click', ()=>sendMessageToContentScript("alert-message"));
 });
 
-async function sendMessageToContentScript() {
+async function sendMessageToContentScript(message) {
     try {
         chrome.tabs.query({ active: true, lastFocusedWindow: true })
             .then(([tab]) => {
                 chrome.tabs.sendMessage(
                     tab.id, 
-                    { message: 'Hello from popup.js!' },
+                    { message },
                     (response) => {
                         if(response.received)
                             window.close();
