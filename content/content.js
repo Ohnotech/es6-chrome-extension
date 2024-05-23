@@ -15,12 +15,13 @@ try {
 
             (async () => {
                 const src = chrome.runtime.getURL("content/content-module.js");
-                const contentMain = await import(src);
+                import(src).then((jsModule => {
+                    if(request.message === "log-message")
+                        jsModule.logMessage("Log message in content.js");
+                    else if(request.message === "alert-message")
+                        jsModule.alertMessage("Alert message in content.js");
+                }))
 
-                if(request.message === "log-message")
-                    contentMain.logMessage("Log message in content.js");
-                else if(request.message === "alert-message")
-                    contentMain.alertMessage("Alert message in content.js");
             })();
 
             sendResponse({
