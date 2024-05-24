@@ -15,7 +15,7 @@
       "js": [
         "/content/content.js"
       ],
-      "type": "modal"
+      "type": "modules"
     }
   ],
   "permissions": [
