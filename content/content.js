@@ -8,12 +8,11 @@ try {
             Promise.all([
                 import('./alert-module.js'),
                 import('./log-module.js')
-            ]).then(([
-                {alertMessage}, 
-                {logMessage}
-            ]) => {
+            ]).then(() => {
+                const {alertMessage, TestClass, logMessage} = jsModule;
                 console.log("alertMessage, logMessage module loaded");
-
+                const testClass = new TestClass();
+                console.log({testClass});
                 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     if (request.message) {
                         
